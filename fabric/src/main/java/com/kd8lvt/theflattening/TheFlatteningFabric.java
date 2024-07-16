@@ -1,8 +1,6 @@
-package com.kd8lvt.theflattening.fabric;
+package com.kd8lvt.theflattening;
 
 import net.fabricmc.api.ModInitializer;
-
-import com.kd8lvt.theflattening.TheFlattening;
 
 public final class TheFlatteningFabric implements ModInitializer {
     @Override

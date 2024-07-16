@@ -1,5 +1,6 @@
 package com.kd8lvt.theflattening.recipe;
 
+import com.kd8lvt.theflattening.TheFlattening;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.item.ItemStack;
@@ -12,13 +13,11 @@ import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.world.World;
 
-import static com.kd8lvt.theflattening.TheFlattening.LOG;
-
-public class FlatteningRecipe implements Recipe<SingleStackRecipeInput> {
+public class BlockFlatteningRecipe implements Recipe<SingleStackRecipeInput> {
     public ItemStack input;
     public ItemStack output;
-    public FlatteningRecipe(ItemStack input, ItemStack output) {
-        LOG.info("New FlatteningRecipe: %s -> %s".formatted(input.toString(),output.toString()));
+    public BlockFlatteningRecipe(ItemStack input, ItemStack output) {
+        TheFlattening.debug("New FlatteningRecipe: %s -> %s".formatted(input.toString(), output.toString()));
         this.input = input;
         this.output = output;
     }
@@ -28,11 +27,11 @@ public class FlatteningRecipe implements Recipe<SingleStackRecipeInput> {
     }
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return FlatteningRecipe.Serializer.INSTANCE;
+        return BlockFlatteningRecipe.Serializer.INSTANCE;
     }
     @Override
     public RecipeType<?> getType() {
-        return FlatteningRecipe.Type.INSTANCE;
+        return BlockFlatteningRecipe.Type.INSTANCE;
     }
     @Override
     public boolean matches(SingleStackRecipeInput inventory, World world) {
@@ -44,36 +43,36 @@ public class FlatteningRecipe implements Recipe<SingleStackRecipeInput> {
     @Override
     public ItemStack craft(SingleStackRecipeInput input, RegistryWrapper.WrapperLookup lookup) {return ItemStack.EMPTY;}
 
-    public static class Type implements RecipeType<FlatteningRecipe> {
+    public static class Type implements RecipeType<BlockFlatteningRecipe> {
         private Type() {}
         public static final Type INSTANCE = new Type();
         public static final String ID = "flattening";
     }
 
-    public static class Serializer implements RecipeSerializer<FlatteningRecipe> {
+    public static class Serializer implements RecipeSerializer<BlockFlatteningRecipe> {
         public static Serializer INSTANCE = new Serializer();
         public static final String ID = "flattening";
         public Serializer() {}
 
-        public static final MapCodec<FlatteningRecipe> CODEC = RecordCodecBuilder.mapCodec((instance)-> instance.group(ItemStack.VALIDATED_CODEC.fieldOf("input").forGetter((FlatteningRecipe recipe)-> recipe.input),ItemStack.VALIDATED_CODEC.fieldOf("output").forGetter((FlatteningRecipe recipe)-> recipe.output)).apply(instance,FlatteningRecipe::new));
-        public static final PacketCodec<RegistryByteBuf, FlatteningRecipe> PACKET_CODEC = PacketCodec.ofStatic(FlatteningRecipe.Serializer::write, FlatteningRecipe.Serializer::read);
+        public static final MapCodec<BlockFlatteningRecipe> CODEC = RecordCodecBuilder.mapCodec((instance)-> instance.group(ItemStack.VALIDATED_CODEC.fieldOf("input").forGetter((BlockFlatteningRecipe recipe)-> recipe.input),ItemStack.VALIDATED_CODEC.fieldOf("output").forGetter((BlockFlatteningRecipe recipe)-> recipe.output)).apply(instance, BlockFlatteningRecipe::new));
+        public static final PacketCodec<RegistryByteBuf, BlockFlatteningRecipe> PACKET_CODEC = PacketCodec.ofStatic(BlockFlatteningRecipe.Serializer::write, BlockFlatteningRecipe.Serializer::read);
 
 
         @Override
-        public MapCodec<FlatteningRecipe> codec() {
+        public MapCodec<BlockFlatteningRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public PacketCodec<RegistryByteBuf, FlatteningRecipe> packetCodec() {
+        public PacketCodec<RegistryByteBuf, BlockFlatteningRecipe> packetCodec() {
             return PACKET_CODEC;
         }
-        public static FlatteningRecipe read(RegistryByteBuf buf) {
+        public static BlockFlatteningRecipe read(RegistryByteBuf buf) {
             ItemStack input = ItemStack.PACKET_CODEC.decode(buf);
             ItemStack output = ItemStack.PACKET_CODEC.decode(buf);
-            return new FlatteningRecipe(input,output);
+            return new BlockFlatteningRecipe(input,output);
         }
-        public static void write(RegistryByteBuf buf, FlatteningRecipe recipe) {
+        public static void write(RegistryByteBuf buf, BlockFlatteningRecipe recipe) {
             ItemStack.PACKET_CODEC.encode(buf,recipe.input);
             ItemStack.PACKET_CODEC.encode(buf,recipe.output);
         }

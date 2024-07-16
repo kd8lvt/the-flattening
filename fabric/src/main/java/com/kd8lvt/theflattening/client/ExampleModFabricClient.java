@@ -1,4 +1,4 @@
-package com.kd8lvt.theflattening.fabric.client;
+package com.kd8lvt.theflattening.client;
 
 import net.fabricmc.api.ClientModInitializer;
 

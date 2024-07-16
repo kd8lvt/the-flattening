@@ -6,6 +6,8 @@
   "client": [
   ],
   "mixins": [
+    "AnvilBlockMixin",
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

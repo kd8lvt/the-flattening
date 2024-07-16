@@ -1,8 +1,6 @@
-package com.kd8lvt.theflattening.neoforge;
+package com.kd8lvt.theflattening;
 
 import net.neoforged.fml.common.Mod;
-
-import com.kd8lvt.theflattening.TheFlattening;
 
 @Mod(TheFlattening.MOD_ID)
 public final class TheFlatteningNeoForge {

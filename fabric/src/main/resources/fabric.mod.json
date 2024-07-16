@@ -16,10 +16,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.kd8lvt.theflattening.fabric.TheFlatteningFabric"
+      "com.kd8lvt.theflattening.TheFlatteningFabric"
     ],
     "client": [
-      "com.kd8lvt.theflattening.fabric.client.ExampleModFabricClient"
+      "com.kd8lvt.theflattening.client.ExampleModFabricClient"
     ]
   },
   "mixins": [
